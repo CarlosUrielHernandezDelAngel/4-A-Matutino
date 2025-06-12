@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API HP/RM</title>
+
+</head>
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="StyleUniversal.css">
+    <nav class="navbar navbar-light navbarBg">
+        <div class="container">
+            <a class="navbar-brand in" href="/database/MainP.html" style="color: white;">Inicio</a>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="font-menu nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: white;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 1</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="hola dropdown-item" href="/database/p1.php">Página 1</a>
+                            <a class="dropdown-item" href="/database/p2.php">Página 2</a>
+                            <a class="dropdown-item" href="/database/p3.php">Página 3</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: white;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 2</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/database/p4.php">Página 4</a>
+                            <a class="dropdown-item" href="/database/p5.php">Página 5</a>
+                            <a class="dropdown-item" href="/database/p6.html">Página 6</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="color: white;"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Unidad 3</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/database/p7.html">Página 7</a>
+                            <a class="dropdown-item" href="/database/p8.html">Página 8</a>
+                            <a class="dropdown-item" href="/database/p9.html">Página 9</a>
+                        </div>
+                    </li>
+
+                    
+                </ul>
+            </div>
+            
+
+        </div>
+    </nav>
+
+    <style>
+                
+        *{
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-color: #161B33;
+            --secondary-color: #F1DAC4;
+            --terceary-color: #A69CAC;
+            --color-cuarto: #0D0C1D;
+            --color--quinto: #ffffff;
+        }
+        body {
+            background-color: var(--primary-color);
+            margin: 0;
+        }
+        header {
+            padding: 16px;
+            display: flex;
+            justify-content: flex-end;
+            background-color: var(--terceary-color);
+        }
+        .search {
+            background-color: rgb(rgba(9, 255, 0, 0.713));
+            border: 5px solid var(--primary-color);
+            border-radius: 50px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+            padding: 10px 16px;
+            color: var(--terceary-color);
+        }
+        .search::placeholder {
+            color: var(--terceary-color);
+        }
+        .search:focus {
+            outline: none;
+            background-color: var(--primary-color);
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .personaje {
+            width: 300px;
+            margin: 15px;
+            background-color: var(--secondary-color);
+            box-shadow: 0 5px 5px black;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .personaje:hover {
+            background-color: rgb(255, 222, 186);
+            transform: scale(1.05);
+            box-shadow: 0 4px 4px 2px rgb(255, 202, 145);
+        }
+        .personaje img {
+            width: 100%;
+            object-fit: contain;
+        }
+        .personaje-info {
+            color: var(--primary-color);
+            display: flex;
+            align-items: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4px;
+            padding: 8px 15px 15px;
+            letter-spacing: 5px;
+        }
+        .personaje-info h1 {
+            color: var(--color--quinto);
+            margin-top: 0;
+        }
+
+        .personaje-info h3 {
+            color: var(--color--cuarto);
+            margin-top: 0;
+        }
+        .personaje-info span {
+            background-color: var(--primary-color);
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .descripcion {
+            background-color: white;
+            padding: 32px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            max-height: 100%;
+            transform: translateY(101%);
+            overflow-y: auto;
+            transition: transform 1s ease-in;
+        }
+        .personaje:hover .descripcion {
+            transform: translateY(0);
+        }
+        .personaje td {
+            padding: 10px;
+        }
+        .personaje tr {
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 1px;
+        }
+    </style>
+
+    <header>
+        <img src="api.jpg" alt="logo" style="width: auto" height="50px">
+        <form id="form">
+            <input type="text" id="search" class="search" placeholder="Search...">
+        </form>
+    </header>
+    <main id="main"></main>
+
+    <script>
+        const API_HP = 'https://hp-api.onrender.com/api/characters';
+        const API_RICK = 'https://rickandmortyapi.com/api/character';
+        const main = document.getElementById('main');
+        const form = document.getElementById('form');
+        const search = document.getElementById('search');
+
+        getAllCharacters();
+        async function getAllCharacters() {
+            const [rmRes, hpRes] = await Promise.all([
+                fetch(API_RICK).then(res => res.json()),
+                fetch(API_HP).then(res => res.json()),
+            ]);
+            const rickChars = rmRes.results || [];
+            const hpChars = hpRes || [];
+
+            showCharacters([...rickChars, ...hpChars]);
+        }
+
+        function showCharacters(characters){
+            main.innerHTML = '';
+
+            characters.forEach((char) => {
+                const charElement = document.createElement('div');
+                charElement.classList.add('personaje');
+                if ('wand' in char) {
+                    const {
+                    id, name, alternate_names, species, gender, house, dateOfBirth, wizard, ancestry, eyeColour,
+                    hairColour, wand = {}, patronus, hogwartsStudent, hogwartsStaff, actor, alive, image
+                } = char;
+
+                const {wood = '', core = '', length = ''} = wand;
+
+                charElement.innerHTML = `
+                <div>
+                    <h1>${name}</h1>
+                </div>
+                <br>
+                <img src="${image}" alt="${name}">
+                <div class="descripcion">
+                    <table>
+                        <tbody>
+                            <tr><td>Nombres Alternativos</td><td>${alternate_names}</td></tr>
+                            <tr><td>Especie</td><td>${species}</td></tr>
+                            <tr><td>Genero</td><td>${gender}</td></tr>
+                            <tr><td>Casa</td><td>${house}</td></tr>
+                            <tr><td>Fecha de Nacimiento</td><td>${dateOfBirth}</td></tr>
+                            <tr><td>Mago</td><td>${wizard}</td></tr>
+                            <tr><td>Ascendencia</td><td>${ancestry}</td></tr>
+                            <tr><td>Color de Ojos</td><td>${eyeColour}</td></tr>
+                            <tr><td>Color de Cabello</td><td>${hairColour}</td></tr>
+                            <tr>
+                                <td>Varita Mágica</td>
+                                <td>
+                                    <ul>
+                                        <li>Madera: ${wood}</li>
+                                        <li>Núcleo: ${core}</li>
+                                        <li>Longitud: ${length}</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr><td>Patrona</td><td>${patronus}</td></tr>
+                            <tr><td>Estudiante de Hogwarts</td><td>${hogwartsStudent}</td></tr>
+                            <tr><td>Personal de Hogwarts</td><td>${hogwartsStaff}</td></tr>
+                            <tr><td>Actor</td><td>${actor}</td></tr>
+                            <tr><td>Vivo</td><td>${alive}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                `;
+                }
+                else {
+                    const { id, name, status, species, gender, origin, location, image } = char;
+                charElement.innerHTML = `
+                <div>
+                    <h1>${name}</h1>
+                </div>
+                <br>
+                <img src="${image}" alt="${name}">
+                <div class="descripcion">
+                    <table>
+                        <tbody>
+                            <tr><td>Estado</td><td>${status}</td></tr>
+                            <tr><td>Especie</td><td>${species}</td></tr>
+                            <tr><td>Genero</td><td>${gender}</td></tr>
+                            <tr><td>Origen</td><td>${origin.name}</td></tr>
+                            <tr><td>Ubicación</td><td>${location.name}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                `;
+                }
+                main.appendChild(charElement);
+                });}
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                const searchTerm = search.value.toLowerCase();
+                if(searchTerm && searchTerm !== ''){
+                    getAllCharacters(`${API_HP} ?name=${searchTerm}`)
+                    search.value='';
+                }else{window.location.reload();}
+            })
+    </script>
+</body>
+</html>
