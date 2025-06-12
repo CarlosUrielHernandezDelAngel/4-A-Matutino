@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personajes HP & RM</title>
+  <style>
+    :root {
+      --primary-color: #4B2E39;
+      --secondary-color: #6F7D8C;
+      --terceary-color: #6C596E;
+      --color-cuarto: #32021F;
+      --color-quinto: #77A0A9;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    header {
+      padding: 1rem;
+      background-color: var(--terceary-color);
+      display: flex;
+      justify-content: center;
+    }
+    .search {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      color: var(--terceary-color);
+      background-color: var(--color-quinto);
+    }
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 2rem;
+    }
+    .card {
+      background-color: var(--secondary-color);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+      box-shadow: 0 0 10px #00000040;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: var(--color-cuarto);
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: var(--color-quinto);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <form id="form">
+      <input type="text" id="search" class="search" placeholder="Buscar personaje...">
+    </form>
+  </header>
+  <main id="main"></main>
+
+  <script>
+    const API_HP = 'https://hp-api.onrender.com/api/characters';
+    const API_RM = 'https://rickandmortyapi.com/api/character';
+    const main = document.getElementById('main');
+    const form = document.getElementById('form');
+    const search = document.getElementById('search');
+
+    getAllCharacters();
+
+    async function getAllCharacters() {
+      const [rmRes, hpRes] = await Promise.all([
+        fetch(API_RM).then(res => res.json()),
+        fetch(API_HP).then(res => res.json()),
+      ]);
+
+      const rickChars = rmRes.results || [];
+      const hpChars = hpRes || [];
+
+      showCharacters([...rickChars, ...hpChars]);
+    }
+
+    function showCharacters(characters) {
+      main.innerHTML = '';
+
+      characters.forEach((char) => {
+        const div = document.createElement('div');
+        div.classList.add('card');
+
+        let html = '';
+        if ('wand' in char) {
+          html = `
+            <img src="${char.image}" alt="${char.name}">
+            <div class="card-content">
+              <h2>${char.name}</h2>
+              <p>Especie: ${char.species}</p>
+              <p>Casa: ${char.house || 'Desconocida'}</p>
+              <p>Actor: ${char.actor}</p>
+            </div>
+          `;
+        } else {
+          html = `
+            <img src="${char.image}" alt="${char.name}">
+            <div class="card-content">
+              <h2>${char.name}</h2>
+              <p>Status: ${char.status}</p>
+              <p>Origen: ${char.origin.name}</p>
+              <p>Ubicación: ${char.location.name}</p>
+            </div>
+          `;
+        }
+
+        div.innerHTML = html;
+        main.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const term = search.value.toLowerCase();
+      if (!term) {
+        return window.location.reload();
+      }
+
+      getAllCharacters().then(() => {
+        const cards = Array.from(document.querySelectorAll('.card'));
+        cards.forEach(card => {
+          const name = card.querySelector('h2').textContent.toLowerCase();
+          if (!name.includes(term)) {
+            card.remove();
+          }
+        });
+      });
+
+      search.value = '';
+    });
+  </script>
+</body>
+</html>
