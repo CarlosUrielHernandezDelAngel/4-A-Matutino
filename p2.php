@@ -22,7 +22,7 @@
 <body>
     <nav class="navbar navbar-light navbarBg">
         <div class="container">
-            <a class="navbar-brand in" href="/database/MainP.html" style="color: white;">Inicio</a>
+            <a class="navbar-brand in" href="/database/index.html" style="color: white;">Inicio</a>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="nav navbar-nav">
